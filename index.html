@@ -1,0 +1,237 @@
+﻿<html>
+<head>
+    <title>Samba Shares</title>
+    <meta charset="utf-8">
+    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <script src="../base1/cockpit.js"></script>
+	
+	<style>
+		.empty-panel-text {
+			text-align: center;
+			margin: 5px;
+			color: #545454;
+		}
+	
+		#fixleft {
+			padding-left: 0px;
+		}
+	
+		#fixright {
+			padding-right: 0px;
+		}
+		
+		.row {
+			font-family: "Open Sans",Helvetica,Arial,sans-serif;
+			font-size: 12px;
+			color: #363636;
+		}
+		.rowsmall {
+		font-family: "Open Sans",Helvetica,Arial,sans-serif;
+			font-size: 12px;
+			color: #363636;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		
+		<div id="stored_config" style="display:none">
+		</div>
+		
+		<div id="stored_users" style="display:none">
+		</div>
+		
+		<div id="applychanges" style="margin-top: 20px; display:none">
+			<button class="btn btn-primary accounts-privileged" id="apply_changes" data-container="body" data-placement="right" data-original-title="" title="">Apply Changes</button>
+		</div>
+		
+
+		<div class="modal in" id="create_user_dialog" tabindex="-1" role="dialog" data-backdrop="static" style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4  id="create_user_title" class="modal-title">Create New Samba Account</h4>
+					</div>
+					<div class="modal-body">
+						<table class="form-table-ct rowsmall">
+							<tbody>
+								<tr id="username_label">
+									<td><label class="control-label" for="system_username">Username</label></td>
+									<td><input class="form-control" type="text" id="system_username" value=""></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="system_password">Password</label></td>
+									<td>
+										<input class="form-control" type="password" id="system_password" value="">
+									</td>
+								</tr>				
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default" id="cancel_user" data-dismiss="modal">Cancel</button>
+						<button class="btn btn-primary" id="create_user_accept">Create</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal in" id="create_share_dialog" tabindex="-1" role="dialog" data-backdrop="static" style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="create_share_title">Create New Share</h4>
+					</div>
+					<div class="modal-body">
+						<table class="form-table-ct rowsmall">
+							<tbody>
+								<tr>
+									<td><label class="control-label" for="share_name">Share</label></td>
+									<td><input class="form-control" type="text" id="share_name" value=""></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="share_path">Path</label></td>
+									<td><input class="form-control" type="text" id="share_path" value=""></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="share_comment">Comment</label></td>
+									<td><input class="form-control" type="text" id="share_comment" value=""></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="share_browseable">Browseable</label></td>
+									<td><label><input type="checkbox" id="share_browseable"></label></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="share_writeable">Writeable</label></td>
+									<td><label><input type="checkbox" id="share_writeable"></label></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="share_users">Users</label></td>
+									<td><input class="form-control" type="text" id="share_users" value=""></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="advanced_share">Advanced Settings</label></td>
+									<td><label><input type="checkbox" id="advanced_share"></label></td>
+								</tr>			
+								<tr id="adv4" style="display: none">
+									<td><label class="control-label" for="share_printable">Printable</label></td>
+									<td><label><input type="checkbox" id="share_printable"></label></td>
+								</tr>
+								<tr id="adv3" style="display: none">
+									<td><label class="control-label" for="share_guest">Guest Ok</label></td>
+									<td><label><input type="checkbox" id="share_guest"></label></td>
+								</tr>
+								<tr id="adv2" style="display: none">
+									<td><label class="control-label" for="share_readonly">Read Only</label></td>
+									<td><label><input type="checkbox" id="share_readonly"></label></td>
+								</tr>
+								<tr id="adv1" style="display: none">
+									<td><label class="control-label" for="share_createmask">Create Mask</label></td>
+									<td>
+										<table class="rowsmall">
+											<tr>
+												<th></th>
+												<th>&nbsp;Owner&nbsp;</th>
+												<th>&nbsp;Group&nbsp;</th>
+												<th>&nbsp;Public&nbsp;</th>
+											</tr>
+											<tr>
+												<td>Read</td>
+												<td><input type="checkbox" id="share_400"></td>
+												<td><input type="checkbox" id="share_40"></td>
+												<td><input type="checkbox" id="share_4"></td>
+											</tr>
+											<tr>
+												<td>Write</td>
+												<td><input type="checkbox" id="share_200"></td>
+												<td><input type="checkbox" id="share_20"></td>
+												<td><input type="checkbox" id="share_2"></td>
+											</tr>
+											<tr>
+												<td>Execute</td>
+												<td><input type="checkbox" id="share_100"></td>
+												<td><input type="checkbox" id="share_10"></td>
+												<td><input type="checkbox" id="share_1"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</tbody>		
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-danger" id="delete_share" style="float: left; display:none;">Delete</button>
+						<button class="btn btn-default" id="cancel_share" data-dismiss="modal">Cancel</button>
+						<button class="btn btn-primary" id="create_share_accept">Create</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div class="col-md-8 col-lg-9 page-ct" id="fixleft">
+				<div class="panel panel-default storage-mounts" id="nfs-mounts">
+					<div class="panel-heading"><span class="pull-right">
+						<button id="create_share" class="btn btn-primary"><span class="fa fa-plus"></span></button></span><span>Samba Shares</span>
+					</div>
+					<div class="empty-panel-text" style="display:none">No Samba shares set up</div>
+					<table class="table table-hover rowsmall" id="shares_table">
+						<thead>
+							<tr>
+								<th>Share</th>
+								<th>Path</th>
+								<th>Comment</th>
+								<th>Browseable</th>
+								<th>Writeable</th>
+								<th>Users</th>
+								<th>Printable</th>
+								<th>Guest</th>
+								<th>Read Only</th>
+								<th>Create Mask</th>
+							</tr>
+						</thead>
+
+						<tbody id="sharespane">
+						</tbody>
+					</table>
+				</div>				
+				<div>
+					<div class="panel panel-default">
+						<div class="panel-heading">Global Properties</div>
+						<table class="table table-hover rowsmall">
+							<thead>
+								<tr >
+									<th>Setting</th>
+									<th>Value</th>
+								</tr>
+							</thead>
+							<tbody id="settingspane">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		
+			<div class="col-md-4 col-lg-3 storage-sidebar page-ct" id="fixright">
+				<div class="panel panel-default" id="mdraids">
+					<div class="panel-heading">
+						<span class="pull-right">
+							<button id="create_user" class="btn btn-primary">
+								<span class="fa fa-plus"></span>
+							</button>
+						</span>
+						<span>Samba Users</span>
+					</div>
+					<div id="empty_samba_users" class="empty-panel-text" style="display:none">No Samba users defined</div>
+					<table class="table table-hover" id="samba_users_table">
+						<tbody class="rowsmall" id="userspane">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script src="smb.js"></script>
+</body>
+</html>
+
