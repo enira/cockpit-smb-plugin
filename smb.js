@@ -322,16 +322,18 @@ function save_config() {
 function parse_users(data) {
 	lines = data.match(/[^\r\n]+/g); 
 	users_config = {}
-	for (var i = 0; i < lines.length; i++) {
-		parse = lines[i].trim();
-		
-		if(parse.startsWith("Unix")) {
-			// comment line
-			index = parse.indexOf(":")
-			var str = [ parse.substring(0, index), parse.substring(index)]
-			as = str[1].trim().substring(1).trim();
+	if(data.trim() != "") {
+		for (var i = 0; i < lines.length; i++) {
+			parse = lines[i].trim();
+			
+			if(parse.startsWith("Unix")) {
+				// comment line
+				index = parse.indexOf(":")
+				var str = [ parse.substring(0, index), parse.substring(index)]
+				as = str[1].trim().substring(1).trim();
 
-			users_config[as] = {};
+				users_config[as] = {};
+			}
 		}
 	}
 	return users_config;
