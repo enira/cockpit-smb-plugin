@@ -1,4 +1,13 @@
 
+function generate_tmpfilename() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return "script_" + s4() + s4() + s4() + s4() + s4() +".sh";
+}
+
 function load_globals(config) {
 	var contents = "";
 	for (var key in config['global']) {
@@ -253,41 +262,65 @@ function save_config() {
 						
 					for(var user in users) {
 						if (users[user].hasOwnProperty("password")) {
-							console.log("Changing user: " + user);
 							
-							var script = "#!/bin/bash\n(echo $2; echo $2 ) | smbpasswd -s -a $1\n";
-							cockpit.file("/tmp/smb.sh",  { superuser: "try" }).replace(script)
+							var scriptname = generate_tmpfilename();
+							
+							var script = "#!/bin/bash\n\nuser=\"" + user + "\"\npw=\"" + users[user]["password"] + "\"\n\n(echo $pw; echo $pw ) | smbpasswd -s -a $user\n";
+							
+							cockpit.file("/tmp/" + scriptname,  { superuser: "try" }).replace(script)
 							.done(function (tag) {
 								// done
 								
-								var cmd_execute = ["chmod", "+x", "/tmp/smb.sh"];
+								var cmd_execute = ["chmod", "+x", "/tmp/" + scriptname];
 								cockpit.spawn(cmd_execute, { superuser: "try" })
 								.done(function(data) {
 									// run
 									
-									var cmd_smb_run = ["/tmp/smb.sh", user, users[user]["password"]];
+									var cmd_smb_run = ["/tmp/" + scriptname];
 									cockpit.spawn(cmd_smb_run, { superuser: "try" })
 									.done(function(data) {
-										// user added, delete file
+										// user added
 										
-										var cmd_smb_delete = ["rm", "/tmp/smb.sh"];
+										// delete script
+										var cmd_smb_delete = ["rm", "/tmp/" + scriptname];
 										cockpit.spawn(cmd_smb_delete, { superuser: "try" })
 										.done(function(data) {
-											// done
-											
+											// done	
 										})
 										.fail(function (error) {
 											console.log(error);
 										});	
+										
 									})
 									.fail(function (error) {
 										console.log(error);
+										
+										// delete script
+										var cmd_smb_delete = ["rm", "/tmp/" + scriptname];
+										cockpit.spawn(cmd_smb_delete, { superuser: "try" })
+										.done(function(data) {
+											// done	
+										})
+										.fail(function (error) {
+											console.log(error);
+										});	
 									});	
 									
 								})
 								.fail(function (error) {
 									console.log(error);
-								});	
+									
+									// delete script
+									var cmd_smb_delete = ["rm", "/tmp/" + scriptname];
+									cockpit.spawn(cmd_smb_delete, { superuser: "try" })
+									.done(function(data) {
+										// done	
+									})
+									.fail(function (error) {
+										console.log(error);
+									});	
+										
+									});	
 								
 							})
 							.fail(function (error) {
@@ -390,9 +423,6 @@ function add_user() {
 }
 
 function create_user() {
-	//var x = document.getElementById("username_label");
-	//x.style.display = "";
-	
 	x = document.getElementById("create_user_dialog");
 	x.style.display = "block";
 }
@@ -565,6 +595,9 @@ function create_share_accept() {
 	var saveobj = read_config("stored_config");
 	saveobj[document.getElementById("share_name").value] = newshare;
 	store_config(saveobj, "stored_config");
+	
+	// reload shares
+	load_shares(saveobj);
 	
 	var x = document.getElementById("create_share_dialog");
 	x.style.display = "none";
