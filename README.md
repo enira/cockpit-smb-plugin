@@ -55,4 +55,4 @@ sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.
 ```
 
 # License
-Simple, it's GNU General Public License v3.0
+Simple, it's GNU General Public License v2.1
