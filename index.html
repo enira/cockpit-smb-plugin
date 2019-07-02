@@ -76,6 +76,37 @@
 			</div>
 		</div>
 		
+		
+		<div class="modal in" id="create_property_dialog" tabindex="-1" role="dialog" data-backdrop="static" style="display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4  id="create_property_title" class="modal-title">Create Global Property</h4>
+					</div>
+					<div class="modal-body">
+						<table class="form-table-ct rowsmall">
+							<tbody>
+								<tr id="username_label">
+									<td><label class="control-label" for="setting_setting">Setting</label></td>
+									<td><input class="form-control" type="text" id="setting_setting" value=""></td>
+								</tr>
+								<tr>
+									<td><label class="control-label" for="setting_value">Value</label></td>
+									<td>
+										<input class="form-control" type="text" id="setting_value" value="">
+									</td>
+								</tr>				
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default" id="cancel_property" data-dismiss="modal">Cancel</button>
+						<button class="btn btn-primary" id="create_property_accept">Create</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div class="modal in" id="create_share_dialog" tabindex="-1" role="dialog" data-backdrop="static" style="display: none;">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -171,8 +202,14 @@
 		<div>
 			<div class="col-md-8 col-lg-9 page-ct" id="fixleft">
 				<div class="panel panel-default storage-mounts" id="nfs-mounts">
-					<div class="panel-heading"><span class="pull-right">
-						<button id="create_share" class="btn btn-primary"><span class="fa fa-plus"></span></button></span><span>Samba Shares</span>
+					<div class="panel-heading">
+						<span class="pull-right">
+							<button id="create_share" class="btn btn-primary">
+								<span class="fa fa-plus">
+								</span>
+							</button>
+						</span>
+						<span>Samba Shares</span>
 					</div>
 					<div class="empty-panel-text" style="display:none">No Samba shares set up</div>
 					<table class="table table-hover rowsmall" id="shares_table">
@@ -197,8 +234,16 @@
 				</div>				
 				<div>
 					<div class="panel panel-default">
-						<div class="panel-heading">Global Properties</div>
-						<table class="table table-hover rowsmall">
+						<div class="panel-heading">
+							<span class="pull-right">
+								<button id="create_property" class="btn btn-primary">
+									<span class="fa fa-plus">
+									</span>
+								</button>
+							</span>
+							<span>Global Properties</span>
+						</div>
+						<table class="table table-hover rowsmall" id="properties_table">
 							<thead>
 								<tr >
 									<th>Setting</th>

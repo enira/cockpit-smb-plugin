@@ -16,6 +16,27 @@ function load_globals(config) {
 		}
 	}
 	document.getElementById("settingspane").innerHTML = contents;
+	
+	var table = document.getElementById("properties_table");
+	var rows = table.getElementsByTagName("tr");
+	for (i = 0; i < rows.length; i++) {
+		var currentRow = table.rows[i];
+		var createClickHandler = function(row) {
+			return function() {
+				var cell1 = row.getElementsByTagName("td")[0];
+				
+				var cell2 = row.getElementsByTagName("td")[1];
+				try {
+					var id = cell1.innerHTML;
+					var prop = cell2.innerHTML;
+					edit_property_share(id, prop);
+				}catch(err) {
+				}
+			};
+		
+		};
+		currentRow.onclick = createClickHandler(currentRow);
+	}
 }
 
 function delete_share() {
@@ -37,9 +58,8 @@ function delete_share() {
 }
 
 function edit_user(user) {
-	
 	document.getElementById("create_user_title").innerHTML = "Edit - " + user;
-	
+	// TODO
 	//var x = document.getElementById("username_label");
 	//x.style.display = "none";
 	document.getElementById("system_username").value = user;
@@ -47,6 +67,18 @@ function edit_user(user) {
 	x = document.getElementById("create_user_dialog");
 	x.style.display = "block";
 }
+
+function edit_property_share(id, prop) {
+	document.getElementById("create_property_title").innerHTML = "Edit - " + id;
+	document.getElementById("create_property_accept").innerHTML = "Update";
+
+	document.getElementById("setting_setting").value = id;
+	document.getElementById("setting_setting").readOnly = true;
+	document.getElementById("setting_value").value = prop;
+		
+	x = document.getElementById("create_property_dialog");
+	x.style.display = "block";
+} 
 
 function edit_samba_share(share) {
 	var editobj = read_config("stored_config");
@@ -434,12 +466,27 @@ function create_share() {
 	x.style.display = "block";
 }
 
+function create_property() {
+	document.getElementById("create_property_title").innerHTML = "Create Global Property";
+	
+	var x = document.getElementById("create_property_dialog");
+	x.style.display = "block";
+}
+
 function cancel_share() {
 	var x = document.getElementById("create_share_dialog");
 	x.style.display = "none";
 	
 	// empty out all
 	clear_create_share();
+}
+
+function cancel_property() {
+	var x = document.getElementById("create_property_dialog");
+	x.style.display = "none";
+	
+	// empty out all
+	clear_create_property();
 }
 
 function cancel_user() {
@@ -464,6 +511,22 @@ function create_user_accept() {
 	x.style.display = "none";
 	x = document.getElementById("applychanges");
 	x.style.display = "block";
+}
+
+function create_property_accept() {
+	var saveobj = read_config("stored_config");
+	saveobj["global"][document.getElementById("setting_setting").value] = document.getElementById("setting_value").value;
+	store_config(saveobj, "stored_config");
+	
+	var x = document.getElementById("create_property_dialog");
+	x.style.display = "none";
+	x = document.getElementById("applychanges");
+	x.style.display = "block";
+	
+	// reload properties
+	load_globals(saveobj);
+	
+	clear_create_property();
 }
 
 function toggle_advanced_share() {
@@ -526,6 +589,16 @@ function clear_create_share() {
 	x.style.display = "none";
 	
 }
+
+function clear_create_property() {
+	document.getElementById("setting_setting").value = "";
+	document.getElementById("setting_value").value = "";
+	document.getElementById("setting_setting").readOnly = false;
+	
+	document.getElementById("create_property_accept").innerHTML = "Create";
+}
+
+
 
 function create_share_accept() {
 	var newshare = {};
@@ -596,6 +669,9 @@ function create_share_accept() {
 	saveobj[document.getElementById("share_name").value] = newshare;
 	store_config(saveobj, "stored_config");
 	
+	// reload properties
+	load_globals(saveobj);
+	
 	// reload shares
 	load_shares(saveobj);
 	
@@ -608,6 +684,11 @@ function create_share_accept() {
 	clear_create_share();
 }
 
+
+
+
+
+// find all info
 var cmd = ["cat", "/etc/samba/smb.conf"];
 cockpit.spawn(cmd, { superuser: "try" }).done(function(data) {
 		insts = new String(data);
@@ -615,7 +696,7 @@ cockpit.spawn(cmd, { superuser: "try" }).done(function(data) {
 	
 		store_config(config, "stored_config");
 		
-		// load globals
+		// load properties
 		load_globals(config);
 		load_shares(config);
 
@@ -623,7 +704,6 @@ cockpit.spawn(cmd, { superuser: "try" }).done(function(data) {
        console.log(error);
     }
 );
-
 
 var cmd_users = ["pdbedit", "-L", "-v"];
 cockpit.spawn(cmd_users, { superuser: "try" }).done(function(data) {
@@ -643,8 +723,11 @@ cockpit.spawn(cmd_users, { superuser: "try" }).done(function(data) {
 document.getElementById("apply_changes").addEventListener("click", save_config);
 document.getElementById("create_user").addEventListener("click", create_user);
 document.getElementById("create_share").addEventListener("click", create_share);
+document.getElementById("create_property").addEventListener("click", create_property);
 document.getElementById("cancel_share").addEventListener("click", cancel_share);
 document.getElementById("cancel_user").addEventListener("click", cancel_user);
+document.getElementById("cancel_property").addEventListener("click", cancel_property);
+document.getElementById("create_property_accept").addEventListener("click", create_property_accept);
 document.getElementById("create_user_accept").addEventListener("click", create_user_accept);
 document.getElementById("create_share_accept").addEventListener("click", create_share_accept)
 document.getElementById("advanced_share").addEventListener("click", toggle_advanced_share);
