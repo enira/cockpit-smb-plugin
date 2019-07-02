@@ -59,11 +59,12 @@ function delete_share() {
 
 function edit_user(user) {
 	document.getElementById("create_user_title").innerHTML = "Edit - " + user;
-	// TODO
-	//var x = document.getElementById("username_label");
-	//x.style.display = "none";
+
+	document.getElementById("system_username").readOnly = true;
 	document.getElementById("system_username").value = user;
 		
+	document.getElementById("create_user_accept").innerHTML = "Update";
+	
 	x = document.getElementById("create_user_dialog");
 	x.style.display = "block";
 }
@@ -85,6 +86,7 @@ function edit_samba_share(share) {
 	var toedit = editobj[share];
 	
 	document.getElementById("create_share_title").innerHTML = "Edit - " + share;
+	document.getElementById("create_share_accept").innerHTML = "Update";
 	
 	document.getElementById("share_path").value = toedit["path"];
 	if(toedit.hasOwnProperty("valid users")) {
@@ -455,6 +457,11 @@ function add_user() {
 }
 
 function create_user() {
+	document.getElementById("system_username").readOnly = false;
+	document.getElementById("create_user_accept").innerHTML = "Create";
+	
+	document.getElementById("system_username").value = "";
+	
 	x = document.getElementById("create_user_dialog");
 	x.style.display = "block";
 }
@@ -578,6 +585,8 @@ function clear_create_share() {
 			document.getElementById("share_" + number).checked = false; 
 		}
 	}
+	
+	document.getElementById("create_share_accept").innerHTML = "Create";
 	
 	var x = document.getElementById("adv1");
 	x.style.display = "none";
