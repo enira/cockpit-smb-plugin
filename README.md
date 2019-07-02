@@ -1,10 +1,10 @@
 # What does this plugin do?
-It's allows you to manage your Samba shares through the Cockpit Project user interface.
+This plugin is an extension to the Cockpit Project(https://cockpit-project.org/). It allows you to manage your Samba shares through the Cockpit Project user interface.
 
 # Before you begin (words of warning)
-This plugin is written in one day. It is very rough around the edges, the code isn't that great (no I can't learn PatternFly and code this in one day.) However, it does seem to do what I want it to do. 
+This plugin is very rough around the edges. It's written in a short amount of time, by someone that has not coded in a very long time and is not familiar with the structure and internal workings of the Cockpit Project GUI. However, it does seem to do what I want it to do. 
 
-If you want to improve some pieces of code, or test it, just let me know. I am more than happy to test your changes and merge them in. The HTML code can use a serious cleanup though.
+If you want to improve some pieces of code, or test it, just let me know, or request a merge of your code. I am more than happy to test your changes and merge them in. The HTML code can use a serious cleanup though.
 
 Use this plugin at your own risk.
 
@@ -15,14 +15,14 @@ This plugin is tested on:
 - Debian 9: Raspbian Stretch Lite (2018-11-13)
 
 ## Samba
-You'll need Samba installed (duh).
+You will need Samba installed.
 
 ```
 sudo apt-get install samba
 ```
 
 ## Cockpit Project
-As this is a Cockpit plugin, you'll need that as well.
+As this is a Cockpit plugin, you will need that as well.
 Cockpit Project
 ```
 sudo apt-get install cockpit
