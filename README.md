@@ -11,8 +11,15 @@ Use this plugin at your own risk.
 # Requirements
 ## Compatibility
 This plugin is tested on:
-- Ubuntu 18.04 LTS
-- ~~Debian 9: Raspbian Stretch Lite (2018-11-13)~~ (see version 1.0)
+| os                                       | version cockpit | version samba | test date  | notes                                |
+|------------------------------------------|-----------------|---------------|------------|--------------------------------------|
+| Ubuntu 16.04                             | 178-1           | x             | 2019-07-11 |                                      |
+| Ubuntu 18.04                             | 164-1           | x             | 2019-07-11 |                                      |
+| Ubuntu 19.04                             | 189-1           | x             | 2019-07-11 |                                      |
+| Debian 9.1 (stretch)                     | 188-1           | x             | 2019-07-11 | backports enabled                    |
+| Debian 10 (buster)                       | 188-1           | x             | 2019-07-11 |                                      |
+| Raspbian Stretch (2018-11-13) (debian 9) | 1xx-1           | x             | 2019-07-11 | outdated os, version unavailable     |
+| Raspbian Buster (2019-06-20) (debian 10) | 196-1           | x             | 2019-07-11 | unstable version (see install notes) |
 
 ## Samba
 You will need Samba installed.
@@ -44,7 +51,16 @@ sudo nano /etc/sudoers.d/cockpit-smb
 $USER ALL=(ALL) NOPASSWD: ALL
 ```
 
-## Create and download the code
+## Raspbian buster (july 2019)
+
+
+## Automatic install
+
+```
+wget -O - https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/install.sh | sudo bash
+```
+
+## Manual install: Create and download the code
 Create the Cockpit plugin folder and download the code.
 ```
 sudo mkdir /usr/share/cockpit/smb
@@ -53,6 +69,12 @@ sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/inde
 sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/manifest.json -O /usr/share/cockpit/smb/manifest.json
 sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.js -O /usr/share/cockpit/smb/smb.js
 ```
+
+# Version 
+
+Version log:
+- 1.1: current
+- 1.0: < version 196
 
 # License
 Simple, it's GNU General Public License v2.1
