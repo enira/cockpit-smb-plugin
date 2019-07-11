@@ -9,8 +9,11 @@ If you want to improve some pieces of code, or test it, just let me know, or req
 Use this plugin at your own risk.
 
 # Requirements
+
 ## Compatibility
+
 This plugin is tested on:
+
 | os                                       | version cockpit | version samba | test date  | notes                                |
 |------------------------------------------|-----------------|---------------|------------|--------------------------------------|
 | Ubuntu 16.04                             | 178-1           | x             | 2019-07-11 |                                      |
