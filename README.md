@@ -12,7 +12,7 @@ Use this plugin at your own risk.
 ## Compatibility
 This plugin is tested on:
 - Ubuntu 18.04 LTS
-- Debian 9: Raspbian Stretch Lite (2018-11-13)
+- ~~Debian 9: Raspbian Stretch Lite (2018-11-13)~~ (see version 1.0)
 
 ## Samba
 You will need Samba installed.
