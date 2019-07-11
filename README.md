@@ -23,7 +23,7 @@ This plugin is tested on:
 | Debian 9.1 (stretch)                     | 188-1           | 4.5.16        | 2019-07-11 | backports enabled                    |
 | Debian 10 (buster)                       | 188-1           | 4.9.5         | 2019-07-11 |                                      |
 | Raspbian Stretch (2018-11-13) (debian 9) | 180-1           | 4.5.15        | 2019-07-11 | backports enabled (outdated)         |
-| Raspbian Buster (2019-06-20) (debian 10) | 196-1           | x             | 2019-07-11 | unstable version (see install notes) |
+| Raspbian Buster (2019-06-20) (debian 10) | 196-1           | 4.9.11        | 2019-07-11 | unstable version (see install notes) |
 
 ## Samba
 You will need Samba installed.
@@ -56,20 +56,47 @@ $USER ALL=(ALL) NOPASSWD: ALL
 ```
 
 ## Raspbian buster (July 2019)
+When I was looking at the Raspberry Pi 4, I noticed that the Debian version of Raspbian is bumped to Debian Buster, by default the version enabled is still 188-1 (July 2019) installing this version will break your OS.
+Version 196-1 will work, at the moment of writing this is still in unstable.
 
+To enable unstable add it to the repository and update.
 ```
-sudo sh -c 'echo "deb http://ftp.it.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://ftp.it.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list'
 sudo apt update
+```
+If you recieve an error about keys, you can request the keys from pgpkeys.mit.edu.
+```
+gpg --keyserver pgpkeys.mit.edu --recv-key  04EE7237B7D453EC
+gpg -a --export 04EE7237B7D453EC | sudo apt-key add -
+```
+To verify you will install the correct version, query the cache policy.
+```
+apt-cache policy cockpit
+```
+This should show version 198-1 as being a candidate to be installed.
+```
+pi@raspberrypi:~ $ apt-cache policy cockpit
+cockpit:
+  Installed: (none)
+  Candidate: 198-1
+  Version table:
+     198-1 500
+        500 http://ftp.it.debian.org/debian unstable/main armhf Packages
+     188-1 500
+        500 http://raspbian.raspberrypi.org/raspbian buster/main armhf Packages
+```
+If the version works out, you can install cockpit.
+```
 sudo apt install cockpit
 ```
 
 ## Automatic install
-
+Just run the following command to let a script to download the files and install the software.
 ```
 wget -O - https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/install.sh | sudo bash
 ```
 
-## Manual install: Create and download the code
+## Manual install
 Create the Cockpit plugin folder and download the code.
 ```
 sudo mkdir /usr/share/cockpit/smb
