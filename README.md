@@ -1,5 +1,5 @@
 # What does this plugin do?
-This plugin is an extension to the Cockpit Project(https://cockpit-project.org/). It allows you to manage your Samba shares through the Cockpit Project user interface.
+This plugin is an extension to the Cockpit Project (https://cockpit-project.org/). It allows you to manage your Samba shares through the Cockpit Project user interface.
 
 # Before you begin (words of warning)
 This plugin is very rough around the edges. It's written in a short amount of time, by someone that has not coded in a very long time and is not familiar with the structure and internal workings of the Cockpit Project GUI. However, it does seem to do what I want it to do. 
@@ -55,8 +55,13 @@ sudo nano /etc/sudoers.d/cockpit-smb
 $USER ALL=(ALL) NOPASSWD: ALL
 ```
 
-## Raspbian buster (july 2019)
+## Raspbian buster (July 2019)
 
+```
+sudo sh -c 'echo "deb http://ftp.it.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list'
+sudo apt update
+sudo apt install cockpit
+```
 
 ## Automatic install
 
