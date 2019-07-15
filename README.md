@@ -1,5 +1,5 @@
 # What does this plugin do?
-This plugin is an extension to the Cockpit Project (https://cockpit-project.org/). It allows you to manage your Samba shares through the Cockpit Project user interface.
+This plugin is an extension to the [Cockpit Project](https://cockpit-project.org/). It allows you to manage your Samba shares through the Cockpit Project user interface.
 
 # Before you begin (words of warning)
 This plugin is very rough around the edges. It's written in a short amount of time, by someone that has not coded in a very long time and is not familiar with the structure and internal workings of the Cockpit Project GUI. However, it does seem to do what I want it to do. 
@@ -16,7 +16,7 @@ This plugin is tested on:
 
 | os                                       | version cockpit | version samba | test date  | notes                                |
 |------------------------------------------|-----------------|---------------|------------|--------------------------------------|
-| Centos 7                                 | 176-4           | 4.8.3         | 2019-07-11 | only compatible with v1.1            |
+| Centos 7                                 | 176-4           | 4.8.3         | 2019-07-11 | only compatible with plugin v1.1     |
 | Ubuntu 16.04                             | 178-1           | 4.3.11        | 2019-07-11 |                                      |
 | Ubuntu 18.04                             | 164-1           | 4.7.6         | 2019-07-11 |                                      |
 | Ubuntu 19.04                             | 189-1           | 4.10.0        | 2019-07-11 |                                      |
@@ -33,8 +33,8 @@ sudo apt-get install samba
 ```
 
 ## Cockpit Project
-As this is a Cockpit plugin, you will need that as well.
-Cockpit Project
+As this is a Cockpit plugin, you will need that as well. (The automatic install script will check this.)
+
 ```
 sudo apt-get install cockpit
 ```
@@ -46,20 +46,19 @@ On Ubuntu 18.04 LTS you need to provide your sudo password at all times. This se
 ```
 sudo sh -c 'echo "$(logname) ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/cockpit-smb'
 ```
-Or if you want to create it yourself:
+Or if you want to create these yourself:
 ```
 sudo nano /etc/sudoers.d/cockpit-smb
 ```
-
+Add the following line:
 ```
 $USER ALL=(ALL) NOPASSWD: ALL
 ```
 
 ## Raspbian buster (July 2019)
-When I was looking at the Raspberry Pi 4, I noticed that the Debian version of Raspbian is bumped to Debian Buster, by default the version enabled is still 188-1 (July 2019) installing this version will break your OS.
-Version 196-1 will work, at the moment of writing this is still in unstable.
+When I was looking at the Raspberry Pi 4, I noticed that the base operating system of Raspbian is bumped to Debian Buster. By default the Project Cockpit version is still 188-1 (July 2019), installing this version will break Raspbian. Version 196-1 will work, but at the moment of writing this version is still only found in [unstable / testing](https://packages.debian.org/search?keywords=cockpit).
 
-To enable unstable add it to the repository and update.
+To enable this version add the following line to the repository and update.
 ```
 sudo sh -c 'echo "deb http://ftp.it.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list'
 sudo apt update
@@ -69,7 +68,7 @@ If you recieve an error about keys, you can request the keys from pgpkeys.mit.ed
 gpg --keyserver pgpkeys.mit.edu --recv-key  04EE7237B7D453EC
 gpg -a --export 04EE7237B7D453EC | sudo apt-key add -
 ```
-To verify you will install the correct version, query the cache policy.
+To verify that you will install the correct version, you can query the cache policy. 
 ```
 apt-cache policy cockpit
 ```
@@ -110,7 +109,7 @@ sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.
 
 Version log:
 - 1.1: current
-- 1.0: < version 196
+- 1.0: versions of Project Cockpit prior to 196-1
 
 # License
 Simple, it's GNU General Public License v2.1
