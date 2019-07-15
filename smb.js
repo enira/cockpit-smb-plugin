@@ -286,7 +286,7 @@ function save_config() {
 			cockpit.file("/etc/samba/smb.conf",  { superuser: "try" }).replace(content)
 			.done(function (tag) {
 				// restart service
-				var cmd_restart = ["service", "smbd", "restart"];
+				var cmd_restart = restartcmd;
 				cockpit.spawn(cmd_restart, { superuser: "try" })
 				.done(function(data) {
 					// jobs done
@@ -726,6 +726,20 @@ cockpit.spawn(cmd_users, { superuser: "try" }).done(function(data) {
 	}).fail(function(error){
        console.log(error);
 	   load_users({});
+    }
+);
+
+var restartcmd = ["service", "smbd", "restart"];
+var cmd_os = ["hostnamectl"];
+cockpit.spawn(cmd_os, { superuser: "try" }).done(function(data) {
+		insts = new String(data);
+		if ( insts.includes("centos")) {
+			restartcmd = ["systemctl", "restart", "smb"];		
+		}else {
+			restartcmd = ["service", "smbd", "restart"];			
+		}
+	}).fail(function(error){
+       console.log(error);
     }
 );
 
