@@ -15,6 +15,7 @@ if ! which apt > /dev/null; then
    fi
 else
    PKG_OK=$(dpkg-query -W --showformat='${Status}\n' samba | grep "install ok installed")
+   
    if [ "" == "$PKG_OK" ]; then
       echo "Samba is not installed, please install samba first."
       exit  
