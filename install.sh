@@ -6,6 +6,24 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if ! which apt > /dev/null; then
+   if rpm -q samba
+   then
+      echo "Samba: OK"
+   else
+      echo "Samba is not installed, please install samba first."
+      exit
+   fi
+else
+   PKG_OK=$(dpkg-query -W --showformat='${Status}\n' samba | grep "install ok installed")
+   if [ "" == "$PKG_OK" ]; then
+      echo "Samba is not installed, please install samba first."
+      exit  
+   else
+      echo "Samba: OK"
+   fi
+fi
+
+if ! which apt > /dev/null; then
    if rpm -q cockpit
    then
       version=`yum info cockpit | grep -i "Version" | awk '{ print $3 }'`
