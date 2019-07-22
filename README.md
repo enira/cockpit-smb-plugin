@@ -25,6 +25,8 @@ This plugin is tested on:
 | Raspbian Stretch (2018-11-13) (debian 9) | 180-1           | 4.5.15        | 2019-07-11 | backports enabled (outdated)         |
 | Raspbian Buster (2019-06-20) (debian 10) | 196-1           | 4.9.11        | 2019-07-11 | unstable version (see install notes) |
 
+Note: this software is also tested on animals, they did not seem to be able to login. 
+
 ## Samba
 You will need Samba installed.
 
