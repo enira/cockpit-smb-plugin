@@ -757,5 +757,10 @@ document.getElementById("create_share_accept").addEventListener("click", create_
 document.getElementById("advanced_share").addEventListener("click", toggle_advanced_share);
 document.getElementById("delete_share").addEventListener("click", delete_share);
 
+document.getElementById("system_password").addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    create_user();
+  }
+});
 
 cockpit.transport.wait(function() { });
