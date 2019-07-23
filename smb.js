@@ -461,6 +461,7 @@ function create_user() {
 	document.getElementById("create_user_accept").innerHTML = "Create";
 	
 	document.getElementById("system_username").value = "";
+	document.getElementById("system_password").value = "";
 	
 	x = document.getElementById("create_user_dialog");
 	x.style.display = "block";
