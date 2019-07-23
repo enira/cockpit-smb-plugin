@@ -759,7 +759,7 @@ document.getElementById("delete_share").addEventListener("click", delete_share);
 
 document.getElementById("system_password").addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
-    create_user();
+    create_user_accept();
   }
 });
 
