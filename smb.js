@@ -515,6 +515,8 @@ function create_user_accept() {
 	contents = contents + "<tr><td class=\"cockpit-account-pic pficon pficon-user\"></td><td style=\"width:100%\"><span class=\"col-md-12 storage-disk-name\">" + user +"</td></tr>";
 	document.getElementById("userspane").innerHTML = contents;
 	
+	load_users(saveobj);
+	
 	var x = document.getElementById("create_user_dialog");
 	x.style.display = "none";
 	x = document.getElementById("applychanges");
