@@ -19,7 +19,7 @@ This plugin is tested on:
 | Centos 7                                 | 176-4           | 4.8.3         | 2019-07-23 | only compatible with plugin v1.1     |
 | Ubuntu 16.04                             | 178-1           | 4.3.11        | 2019-07-23 |                                      |
 | Ubuntu 18.04                             | 164-1           | 4.7.6         | 2019-07-23 |                                      |
-| Ubuntu 19.04                             | 189-1           | 4.10.0        | 2019-07-23 |                                      |
+| Ubuntu 19.04                             | 189-1           | 4.10.0        | 2019-08-01 |                                      |
 | Debian 9.1 (stretch)                     | 188-1           | 4.5.16        | 2019-07-23 | backports enabled                    |
 | Debian 10 (buster)                       | 188-1           | 4.9.5         | 2019-07-23 |                                      |
 | Raspbian Stretch (2018-11-13) (debian 9) | 180-1           | 4.5.15        | 2019-07-11 | backports enabled (outdated)         |
@@ -91,14 +91,14 @@ If the version works out, you can install cockpit.
 sudo apt install cockpit
 ```
 
-## Automatic install
+## Automatic install 
 Just run the following command to let a script to download the files and install the software.
 ```
 wget -O - https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/install.sh | sudo bash
 ```
 
 ## Manual install
-Create the Cockpit plugin folder and download the code.
+Create the Cockpit plugin folder and download the code. For older versions (< version 196), I recommend the automatic install as this fixes a small user inteface glitch.
 ```
 sudo mkdir /usr/share/cockpit/smb
 
@@ -111,7 +111,7 @@ sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.
 
 Version log:
 - 1.1: current
-- 1.0: versions of Project Cockpit prior to 196-1
+- 1.0: first release
 
 # License
 Simple, it's GNU General Public License v2.1
