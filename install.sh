@@ -33,11 +33,14 @@ if ! which apt > /dev/null; then
       mkdir /usr/share/cockpit/smb
       wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/manifest.json -O /usr/share/cockpit/smb/manifest.json
       wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.js -O /usr/share/cockpit/smb/smb.js
+	  wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/index.html -O /usr/share/cockpit/smb/index.html
+	  
       if [ "$version" -ge "196" ]; then
-         wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/index.html -O /usr/share/cockpit/smb/index.html
+         echo "Latest version installed."
       else
-	     # all versions below 196 still use old gui
-         wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/v1.0/index.html -O /usr/share/cockpit/smb/index.html
+	     # all versions below 196 still use old gui, small fix for top spacer
+		 sed -i 's/pagecontent/topspacer/g' /usr/share/cockpit/smb/index.html
+         echo "Small css fix applied."
       fi
    else
       echo "Cockpit is not installed, please install cockpit first."
@@ -55,11 +58,14 @@ else
       mkdir /usr/share/cockpit/smb
       wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/manifest.json -O /usr/share/cockpit/smb/manifest.json
       wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.js -O /usr/share/cockpit/smb/smb.js
+	  wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/index.html -O /usr/share/cockpit/smb/index.html
+	  
       if [ "$version" -ge "196" ]; then
-         wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/index.html -O /usr/share/cockpit/smb/index.html
+         echo "Latest version installed."
       else
-	     # all versions below 196 still use old gui
-         wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/v1.0/index.html -O /usr/share/cockpit/smb/index.html
+	     # all versions below 196 still use old gui, small fix for top spacer
+		 sed -i 's/pagecontent/topspacer/g' /usr/share/cockpit/smb/index.html
+         echo "Small css fix applied."
       fi
    fi
 fi
