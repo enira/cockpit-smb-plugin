@@ -761,10 +761,12 @@ document.getElementById("system_password").addEventListener("keyup", function(ev
   }
 });
 
+cockpit.transport.wait(function() { });
+
+
 // UI fix for versions < 196
 if(parseInt(cockpit.info["version"]) < 196) {
      var elem  = document.getElementById("pagecontent");
      elem.setAttribute("style", "margin-top: 30px;");
 }
 
-cockpit.transport.wait(function() { });
