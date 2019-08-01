@@ -696,9 +696,11 @@ function create_share_accept() {
 	clear_create_share();
 }
 
-
-
-
+// UI fix for versions < 196
+if(parseInt(cockpit.info["version"]) < 196) {
+     var elem  = document.getElementById("pagecontent");
+     elem.setAttribute("style", "margin-top: 30px;");
+}
 
 // find all info
 var cmd = ["cat", "/etc/samba/smb.conf"];
