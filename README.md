@@ -25,8 +25,7 @@ Compatibility of older versions is not guaranteed once the version is end of lif
 | Debian 10 (buster)                       | 188-1           | 4.9.5         | 2020-03-28 |                                      |
 | ~~Raspbian Stretch (2018-11-13) (Debian 9)~~ | ~~180-1~~           | ~~4.5.15~~        | ~~2019-07-11~~ | ~~(deprecated) backports enabled~~       |
 | Raspbian Buster (2019-06-20) (Debian 10) | 196-1           | 4.9.11        | 2019-07-23 | unstable version (see install notes) |
-
-Note: this software is also tested on animals, they did not seem to be able to login. 
+| Fedora 31                                | 215             | 4.11.7        | 2020-03-28 |                                      |
 
 ## Samba
 You will need Samba installed. (The automatic install script will check this.)

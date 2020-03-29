@@ -33,7 +33,6 @@ function load_globals(config) {
 				}catch(err) {
 				}
 			};
-		
 		};
 		currentRow.onclick = createClickHandler(currentRow);
 	}
@@ -250,7 +249,6 @@ function load_users(users) {
 				}catch(err) {
 				}
 			};
-		
 		};
 		currentRow.onclick = createClickHandler(currentRow);
 	}
@@ -296,9 +294,7 @@ function save_config() {
 						
 					for(var user in users) {
 						if (users[user].hasOwnProperty("password")) {
-							
 							var scriptname = generate_tmpfilename();
-							
 							var script = "#!/bin/bash\n\nuser=\"" + user + "\"\npw=\"" + users[user]["password"] + "\"\n\n(echo $pw; echo $pw ) | smbpasswd -s -a $user\n";
 							
 							cockpit.file("/tmp/" + scriptname,  { superuser: "try" }).replace(script)
@@ -734,8 +730,9 @@ cockpit.spawn(cmd_os, { superuser: "try" }).done(function(data) {
 		insts = new String(data);
 		if ( insts.includes("centos")) {
 			restartcmd = ["systemctl", "restart", "smb"];		
-		}else {
-			restartcmd = ["service", "smbd", "restart"];			
+		}
+		if ( insts.includes("fedora")) {
+			restartcmd = ["systemctl", "restart", "smb"];		
 		}
 	}).fail(function(error){
        console.log(error);

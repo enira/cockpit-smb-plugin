@@ -32,7 +32,6 @@ else
    fi
 fi
 
-
 if ! which apt > /dev/null; then
    if rpm -q cockpit
    then
@@ -43,7 +42,7 @@ if ! which apt > /dev/null; then
 	  
       mkdir /usr/share/cockpit/smb
 	  
-      if [ "$version" -ge "208" ]; then
+      if [ "$version" -ge "201" ]; then
          echo -e "${GREEN}Based on version branch 2.x selected${NC}"
          wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/2.x/manifest.json -O /usr/share/cockpit/smb/manifest.json 2>/dev/null || curl https://raw.githubusercontent.com/enira/cockpit-smb-plugin/2.x/manifest.json --output /usr/share/cockpit/smb/manifest.json
          wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/2.x/smb.js -O /usr/share/cockpit/smb/smb.js 2>/dev/null || curl https://raw.githubusercontent.com/enira/cockpit-smb-plugin/2.x/smb.js --output /usr/share/cockpit/smb/smb.js
@@ -80,7 +79,7 @@ else
 	  
       mkdir /usr/share/cockpit/smb
 	  
-      if [ "$version" -ge "208" ]; then
+      if [ "$version" -ge "201" ]; then
          echo -e "${GREEN}Based on version branch 2.x selected${NC}"
          wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/2.x/manifest.json -O /usr/share/cockpit/smb/manifest.json
          wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/2.x/smb.js -O /usr/share/cockpit/smb/smb.js
