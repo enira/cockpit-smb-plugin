@@ -12,11 +12,11 @@ Use this plugin at your own risk.
 
 ## Compatibility
 
-This plugin is tested on:
+Compatibility of older versions is not guaranteed once the version is end of lifecycle. This plugin is tested on:
 
 | os                                       | version cockpit | version samba | test date  | notes                                |
 |------------------------------------------|-----------------|---------------|------------|--------------------------------------|
-| Centos 7                                 | 176-4           | 4.8.3         | 2020-03-28 | only compatible with plugin v1.1     |
+| Centos 7                                 | 195.1           | 4.9.1         | 2020-03-29 |                                      |
 | Ubuntu 16.04                             | 178-1           | 4.3.11        | 2020-03-28 |                                      |
 | Ubuntu 18.04                             | 164-1           | 4.7.6         | 2020-03-28 |                                      |
 | ~~Ubuntu 19.04~~                             | ~~189-1~~           | ~~4.10.0~~        | ~~2019-08-01~~ | ~~(deprecated)~~                         |
@@ -29,7 +29,7 @@ This plugin is tested on:
 Note: this software is also tested on animals, they did not seem to be able to login. 
 
 ## Samba
-You will need Samba installed.
+You will need Samba installed. (The automatic install script will check this.)
 
 ```
 sudo apt-get install samba
@@ -93,14 +93,14 @@ sudo apt install cockpit
 ```
 
 ## Automatic install 
-Just run the following command to let a script to download the files and install the software.
+Just run the following command to let a script to download the files and install the software. This method of installing is recommended.
+The automatic install script will figure out if you are running a previous version and which version to apply. As Project Cockpit moves pretty fast, there is a huge version gap between operating systems. 
 ```
 wget -O - https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/install.sh | sudo bash
 ```
 
 ## Manual install
 Create the Cockpit plugin folder and download the code. The manual install only works with the last tested version of Project Cockpit.
-The automatic install script will figure out if you are running a previous version and which files to apply.
 ```
 sudo mkdir /usr/share/cockpit/smb
 
@@ -111,9 +111,9 @@ sudo wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.
 
 # Version 
 
-Version log:
-- 1.1: current
-- 1.0: first release
+Versions:
+1.x: Older user interface
+2.x: Compatible with patterfly4
 
 # License
 Simple, it's GNU General Public License v2.1
