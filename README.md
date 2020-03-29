@@ -19,11 +19,11 @@ This plugin is tested on:
 | Centos 7                                 | 176-4           | 4.8.3         | 2020-03-28 | only compatible with plugin v1.1     |
 | Ubuntu 16.04                             | 178-1           | 4.3.11        | 2020-03-28 |                                      |
 | Ubuntu 18.04                             | 164-1           | 4.7.6         | 2020-03-28 |                                      |
-| ~~Ubuntu 19.04~~                             | ~~189-1~~           | ~~4.10.0~~        | ~~2019-08-01 | (deprecated)~~                         |
+| ~~Ubuntu 19.04~~                             | ~~189-1~~           | ~~4.10.0~~        | ~~2019-08-01~~ | ~~(deprecated)~~                         |
 | Ubuntu 19.10                             | 202.1-1         | 4.10.7        | 2020-03-28 |                                      |
 | Debian 9.1 (stretch)                     | 188-1           | 4.5.16        | 2020-03-28 | backports enabled                    |
 | Debian 10 (buster)                       | 188-1           | 4.9.5         | 2020-03-28 |                                      |
-| ~~Raspbian Stretch (2018-11-13) (Debian 9)~~ | ~~180-1~~           | ~~4.5.15~~        | ~~2019-07-11 | (deprecated) backports enabled~~       |
+| ~~Raspbian Stretch (2018-11-13) (Debian 9)~~ | ~~180-1~~           | ~~4.5.15~~        | ~~2019-07-11~~ | ~~(deprecated) backports enabled~~       |
 | Raspbian Buster (2019-06-20) (Debian 10) | 196-1           | 4.9.11        | 2019-07-23 | unstable version (see install notes) |
 
 Note: this software is also tested on animals, they did not seem to be able to login. 
