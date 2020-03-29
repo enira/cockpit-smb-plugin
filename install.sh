@@ -31,13 +31,14 @@ if ! which apt > /dev/null; then
       echo "Installed version: $version"
 	  
       mkdir /usr/share/cockpit/smb
-      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/manifest.json -O /usr/share/cockpit/smb/manifest.json
-      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.js -O /usr/share/cockpit/smb/smb.js
-	  wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/index.html -O /usr/share/cockpit/smb/index.html
+      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/1.x/manifest.json -O /usr/share/cockpit/smb/manifest.json
+      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/1.x/smb.js -O /usr/share/cockpit/smb/smb.js
+	  wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/1.x/index.html -O /usr/share/cockpit/smb/index.html
+	  
 	  
       if [ "$version" -ge "196" ]; then
          echo "Latest version installed."
-      else
+	  else
 	     # all versions below 196 still use old gui, small fix for top spacer
 		 sed -i 's/pagecontent/topspacer/g' /usr/share/cockpit/smb/index.html
          echo "Small css fix applied."
@@ -55,10 +56,11 @@ else
    else
       version=`apt-cache policy cockpit | grep -i "Installed" | awk '{ print $2 }' | awk -F'-' '{ print $1 }'`
       echo "Installed version: $version"
+	  
       mkdir /usr/share/cockpit/smb
-      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/manifest.json -O /usr/share/cockpit/smb/manifest.json
-      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/smb.js -O /usr/share/cockpit/smb/smb.js
-	  wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/master/index.html -O /usr/share/cockpit/smb/index.html
+      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/1.x/manifest.json -O /usr/share/cockpit/smb/manifest.json
+      wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/1.x/smb.js -O /usr/share/cockpit/smb/smb.js
+	  wget https://raw.githubusercontent.com/enira/cockpit-smb-plugin/1.x/index.html -O /usr/share/cockpit/smb/index.html
 	  
       if [ "$version" -ge "196" ]; then
          echo "Latest version installed."
