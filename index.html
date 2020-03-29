@@ -2,8 +2,13 @@
 <head>
     <title>Samba Shares</title>
     <meta charset="utf-8">
-    <link href="../base1/cockpit.css" type="text/css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../base1/patternfly.css" type="text/css" rel="stylesheet">
+    <script src="../base1/jquery.js"></script>
     <script src="../base1/cockpit.js"></script>
+    <script src="../manifests.js"></script>
+    <script src="../*/po.js"></script>
+
 	
 	<style>
 		.empty-panel-text {
@@ -24,17 +29,28 @@
 			font-family: "Open Sans",Helvetica,Arial,sans-serif;
 			font-size: 12px;
 			color: #363636;
+			padding-bottom: 5px;
 		}
 		.rowsmall {
-		font-family: "Open Sans",Helvetica,Arial,sans-serif;
+			font-family: "Open Sans",Helvetica,Arial,sans-serif;
 			font-size: 12px;
 			color: #363636;
+			width: 100%
+		}
+		
+		.rowsmall td {
+			padding-right: 12px;
+			padding-bottom: 5px;
 		}
 		
 		.topspacer {
 			margin-top: 30px;
 		}
 		
+		#applychanges {
+			margin-left: 20px; 
+			margin-top: 20px;
+		}
 	</style>
 </head>
 <body>
@@ -46,7 +62,7 @@
 		<div id="stored_users" style="display:none">
 		</div>
 		
-		<div id="applychanges" style="margin-left: 20px; margin-bottom: 20px; display:none">
+		<div id="applychanges" style="display:none">
 			<button class="btn btn-primary accounts-privileged" id="apply_changes" data-container="body" data-placement="right" data-original-title="" title="">Apply Changes</button>
 		</div>
 		
@@ -61,11 +77,11 @@
 						<table class="form-table-ct rowsmall">
 							<tbody>
 								<tr id="username_label">
-									<td><label class="control-label" for="system_username">Username</label></td>
+									<td style="text-align: right; width:120px;"><label class="control-label" for="system_username">Username</label></td>
 									<td><input class="form-control" type="text" id="system_username" value=""></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="system_password">Password</label></td>
+									<td style="text-align: right;"><label class="control-label" for="system_password">Password</label></td>
 									<td>
 										<input class="form-control" type="password" id="system_password" value="">
 									</td>
@@ -92,11 +108,11 @@
 						<table class="form-table-ct rowsmall">
 							<tbody>
 								<tr id="username_label">
-									<td><label class="control-label" for="setting_setting">Setting</label></td>
+									<td style="text-align: right; width:120px;"><label class="control-label" for="setting_setting">Setting</label></td>
 									<td><input class="form-control" type="text" id="setting_setting" value=""></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="setting_value">Value</label></td>
+									<td style="text-align: right;"><label class="control-label" for="setting_value">Value</label></td>
 									<td>
 										<input class="form-control" type="text" id="setting_value" value="">
 									</td>
@@ -122,47 +138,47 @@
 						<table class="form-table-ct rowsmall">
 							<tbody>
 								<tr>
-									<td><label class="control-label" for="share_name">Share</label></td>
+									<td style="text-align: right; width:120px;"><label class="control-label" for="share_name">Share</label></td>
 									<td><input class="form-control" type="text" id="share_name" value=""></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="share_path">Path</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_path">Path</label></td>
 									<td><input class="form-control" type="text" id="share_path" value=""></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="share_comment">Comment</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_comment">Comment</label></td>
 									<td><input class="form-control" type="text" id="share_comment" value=""></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="share_browseable">Browseable</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_browseable">Browseable</label></td>
 									<td><label><input type="checkbox" id="share_browseable"></label></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="share_writeable">Writeable</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_writeable">Writeable</label></td>
 									<td><label><input type="checkbox" id="share_writeable"></label></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="share_users">Users</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_users">Users</label></td>
 									<td><input class="form-control" type="text" id="share_users" value=""></td>
 								</tr>
 								<tr>
-									<td><label class="control-label" for="advanced_share">Advanced Settings</label></td>
+									<td style="text-align: right;"><label class="control-label" for="advanced_share">Advanced Settings</label></td>
 									<td><label><input type="checkbox" id="advanced_share"></label></td>
 								</tr>			
 								<tr id="adv4" style="display: none">
-									<td><label class="control-label" for="share_printable">Printable</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_printable">Printable</label></td>
 									<td><label><input type="checkbox" id="share_printable"></label></td>
 								</tr>
 								<tr id="adv3" style="display: none">
-									<td><label class="control-label" for="share_guest">Guest Ok</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_guest">Guest Ok</label></td>
 									<td><label><input type="checkbox" id="share_guest"></label></td>
 								</tr>
 								<tr id="adv2" style="display: none">
-									<td><label class="control-label" for="share_readonly">Read Only</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_readonly">Read Only</label></td>
 									<td><label><input type="checkbox" id="share_readonly"></label></td>
 								</tr>
 								<tr id="adv1" style="display: none">
-									<td><label class="control-label" for="share_createmask">Create Mask</label></td>
+									<td style="text-align: right;"><label class="control-label" for="share_createmask">Create Mask</label></td>
 									<td>
 										<table class="rowsmall">
 											<tr>
