@@ -91,6 +91,9 @@ function edit_samba_share(share) {
 	if(toedit.hasOwnProperty("valid users")) {
 		document.getElementById("share_users").value = toedit["valid users"];
 	}
+	if(toedit.hasOwnProperty("read list")) {
+		document.getElementById("share_readlist").value = toedit["read list"];
+	}
 	if(toedit.hasOwnProperty("comment")) {
 		document.getElementById("share_comment").value = toedit["comment"];
 	}
@@ -177,12 +180,12 @@ function edit_samba_share(share) {
 
 function load_shares(config) {
 	var contents = "";
-	var properties = ["path", "comment", "browseable", "writeable", "valid users", "printable", "guest ok", "read only", "create mask"];
+	var properties = ["path", "comment", "browseable", "writeable", "valid users", "read list", "printable", "guest ok", "read only", "create mask"];
 	
 	for (var key in config) {
 		if(key != 'global') {
 			contents = contents + "<tr><td>" + key + "</td>";
-			for (var i =0; i < 9; i++) {
+			for (var i =0; i < 10; i++) {
 				if (config[key].hasOwnProperty(properties[i])) {
 					contents = contents + "<td>" + config[key][properties[i]]+"</td>";
 				}
@@ -568,6 +571,7 @@ function toggle_advanced_share() {
 function clear_create_share() {
 	document.getElementById("share_path").value = "";
 	document.getElementById("share_users").value = "";
+	document.getElementById("share_readlist").value = "";
 	document.getElementById("share_comment").value = "";
 	document.getElementById("share_browseable").checked = false;
 	document.getElementById("share_printable").checked = false;
@@ -613,6 +617,7 @@ function create_share_accept() {
 	
 	newshare["path"] = document.getElementById("share_path").value;
 	newshare["valid users"] = document.getElementById("share_users").value;
+	newshare["read list"] = document.getElementById("share_readlist").value;
 	newshare["comment"] = document.getElementById("share_comment").value;
 	
 	if(document.getElementById("share_browseable").checked == true) {
@@ -658,11 +663,11 @@ function create_share_accept() {
 		newshare["create mask"] = mask;
 	}
 	
-	var properties = ["path", "comment", "browseable", "writeable", "valid users", "printable", "guest ok", "read only", "create mask"];
+	var properties = ["path", "comment", "browseable", "writeable", "valid users", "read list", "printable", "guest ok", "read only", "create mask"];
 	
 	contents = document.getElementById("sharespane").innerHTML;
 	contents = contents + "<tr><td>" + document.getElementById("share_name").value + "</td>";
-	for (var i =0; i < 9; i++) {
+	for (var i =0; i < 10; i++) {
 		if (newshare.hasOwnProperty(properties[i])) {
 			contents = contents + "<td>" + newshare[properties[i]]+"</td>";
 		}
