@@ -1,5 +1,5 @@
 {
-    "version": "13",
+    "version": "12",
     "main": "index.html",
     "requires": {
         "cockpit": "186"
